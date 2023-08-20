@@ -44,7 +44,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
     },
     notes: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+    },
+    completed: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     }
   }, {
     sequelize,

@@ -11,6 +11,7 @@ module.exports = {
       },
       title: {
         type: Sequelize.STRING,
+        allowNull: false
       },
       startDate: {
         type: Sequelize.DATE,
@@ -39,6 +40,10 @@ module.exports = {
       },
       notes: {
         type: Sequelize.STRING
+      },
+      completed: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
