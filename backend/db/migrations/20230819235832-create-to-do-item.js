@@ -1,8 +1,15 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
+
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
+options.tableName = 'ToDoItems'
+
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('ToDoItems', {
+    await queryInterface.createTable(options, {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,20 +20,20 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      startDate: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
+      // startDate: {
+      //   type: Sequelize.DATE,
+      //   // allowNull: false
+      // },
       startTime: {
-        type: Sequelize.TIME,
-        allowNull: false
-      },
-      endDate: {
         type: Sequelize.DATE,
         allowNull: false
       },
+      // endDate: {
+      //   type: Sequelize.DATE,
+      //   // allowNull: false
+      // },
       endTime: {
-        type: Sequelize.TIME,
+        type: Sequelize.DATE,
         allowNull: false
       },
       where: {
@@ -47,11 +54,13 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
   },

@@ -18,20 +18,20 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    startDate: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
+    // startDate: {
+    //   type: DataTypes.DATE,
+    //   allowNull: false
+    // },
     startTime: {
-      type: DataTypes.TIME,
-      allowNull: false
-    },
-    endDate: {
       type: DataTypes.DATE,
       allowNull: false
     },
+    // endDate: {
+    //   type: DataTypes.DATE,
+    //   allowNull: false
+    // },
     endTime: {
-      type: DataTypes.TIME,
+      type: DataTypes.DATE,
       allowNull: false
     },
     where: {

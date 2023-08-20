@@ -1,6 +1,8 @@
 const router = require('express').Router();
 
-// GET all items
+// GET all items - INCOMPLETE
+
+// GET all items - COMPLETED
 
 // GET item by id
 
