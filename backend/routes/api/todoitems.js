@@ -68,7 +68,55 @@ router.post('/', async (req, res) => {
 });
 
 // PUT item by id
+router.put('/:itemId', async (req, res) => {
+  const item = await ToDoItem.findOne({
+    where: {id: req.params.itemId}
+  });
+
+  if (!item) res.status(400).json({
+    message: 'Item does not exist at given id.'
+  })
+
+  const { title,
+          startTime,
+          endTime,
+          where,
+          repeat,
+          reminder,
+          notes } = req.body;
+
+  if (!title || !startTime || !endTime) {
+    res.status(400).json({
+      message: 'Validation Error',
+      statusCode: 400,
+      errors: {
+        title: 'What is your To Do?',
+        startTime: 'Please pick a start time',
+        endTime: 'Please pick an end time'
+      }
+    })
+  };
+
+  item.update(req.body);
+  res.json(item);
+});
 
 // DELETE item by id
+router.delete('/:itemId', async (req, res) => {
+  const item = await ToDoItem.findOne({
+    where: {id: req.params.itemId}
+  });
+
+  if (item) {
+    await item.destroy();
+    res.status(201).json({
+      message: 'Item deleted successfully!'
+    })
+  } else {
+    res.status(400).json({
+      message: 'No item exists at given id.'
+    })
+  }
+});
 
 module.exports = router;
