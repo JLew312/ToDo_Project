@@ -83,7 +83,8 @@ router.put('/:itemId', async (req, res) => {
           where,
           repeat,
           reminder,
-          notes } = req.body;
+          notes,
+          completed } = req.body;
 
   if (!title || !startTime || !endTime) {
     res.status(400).json({
