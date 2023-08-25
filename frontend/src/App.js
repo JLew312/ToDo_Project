@@ -1,7 +1,11 @@
+// import { Route, Routes } from 'react-router-dom';
+
+import DateDisplay from './components/DateDisplay';
+
 const App = () => {
   return (
     <>
-      <h1>Welcome to Josh's React Template</h1>
+      <DateDisplay />
     </>
   );
 }
