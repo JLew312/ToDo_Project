@@ -1,31 +1,43 @@
-// import { Route, Routes } from 'react-router-dom';
-import sampleItems from './sampleItems';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+// import sampleItems from './sampleItems';
 
 import DateDisplay from './components/DateDisplay';
-// import ItemTitleCard from './components/ItemTitleCard';
+
+import { getItems } from './store/todoitem';
 
 const App = () => {
+  const dispatch = useDispatch();
+  const items = useSelector((state) => {
+    return state.todoitem
+  })
+
+  // console.log(items)
+
+  useEffect(() => {
+    dispatch(getItems());
+  }, [dispatch]);
 
   let completed = [];
   let incomplete = [];
   const sortItems = (items) => {
-    sampleItems.forEach(item => {
+    (Object.values(items)).forEach(item => {
       item.completed === true ? completed.push(item) : incomplete.push(item);
     })
   };
 
-  sortItems(sampleItems);
+  sortItems(items);
 
   return (
     <>
       <div className='header'>
         <DateDisplay />
-        <h3 className='items-ratio'>{`${completed.length} completed / ${sampleItems.length} total`}</h3>
+        <h3 className='items-ratio'>{`${completed.length} completed / ${(Object.values(items)).length} total`}</h3>
       </div>
       <div>
         {incomplete.map(item => (
           <div className='item-box-closed'>
-            <input type="radio" />
+            <input className='radio-btn' type="radio" />
             <h3 key={item.title}>{item.title}</h3>
             <h4>{item.startTime.toDateString()}</h4>
           </div>
@@ -37,7 +49,7 @@ const App = () => {
       <div>
         {completed.map(item => (
           <div className='item-box-closed-completed'>
-            <input type="radio" />
+            <input className='radio-btn-complete' type="radio" checked />
             <h3 key={item.title}>{item.title}</h3>
             <h4>{item.startTime.toDateString()}</h4>
           </div>
