@@ -10,9 +10,7 @@ const App = () => {
   const dispatch = useDispatch();
   const items = useSelector((state) => {
     return state.todoitem
-  })
-
-  // console.log(items)
+  });
 
   useEffect(() => {
     dispatch(getItems());
@@ -39,7 +37,7 @@ const App = () => {
           <div className='item-box-closed'>
             <input className='radio-btn' type="radio" />
             <h3 key={item.title}>{item.title}</h3>
-            <h4>{item.startTime.toDateString()}</h4>
+            <h4>{new Date(item.startTime).toDateString()}</h4>
           </div>
         ))}
       </div>
@@ -51,7 +49,7 @@ const App = () => {
           <div className='item-box-closed-completed'>
             <input className='radio-btn-complete' type="radio" checked />
             <h3 key={item.title}>{item.title}</h3>
-            <h4>{item.startTime.toDateString()}</h4>
+            <h4>{new Date(item.startTime).toDateString()}</h4>
           </div>
         ))}
       </div>
