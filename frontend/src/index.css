@@ -1,4 +1,5 @@
 body {
+  max-width: 700px;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -7,7 +8,77 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.date-display {
+  font-size: 25px;
+  color: darkmagenta;
+  margin: 10px;
+  margin-left: 20px;
+  text-shadow: rgb(122, 122, 122) 4px 3px 7px;
+}
+
+.items-ratio {
+  margin-right: 83px;
+}
+
+.item-box-closed {
+  border: 2px solid black;
+  margin: 10px;
+  padding: 5px;
+  height: 35px;
+  width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: .2cm;
+  cursor: pointer;
+}
+
+.item-box-closed:hover {
+  border: 2px solid blue;
+  color: blue;
+}
+
+.item-box-closed-completed {
+  color: lightgray;
+  border: 2px solid lightgray;
+  margin: 10px;
+  padding: 5px;
+  height: 35px;
+  width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: .2cm;
+  cursor: pointer;
+}
+
+.item-box-closed-completed:hover {
+  border: 2px solid red;
+  color: red;
+}
+
+.add-btn {
+  font-size: 30px;
+  background-color: darkmagenta;
+  color: white;
+  margin-left: 563px;
+  height: 50px;
+  width: 60px;
+  border-radius: 15%;
+  /* box-shadow: 2px 2px 5px rgb(122, 122, 122); */
+}
+
+.space {
+  margin: 100px;
+}
+
+.completed-label {
+  margin: 10px;
+  color: grey;
 }

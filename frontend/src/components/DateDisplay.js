@@ -6,53 +6,83 @@ const DateDisplay = () => {
     let day = todaysDate.getDay();
     let month = todaysDate.getMonth();
 
-    switch (month) {
+    let dayName;
+
+    switch (day) {
       case 0:
-        month = 'jan';
+        dayName = 'Sunday';
         break;
       case 1:
-        month = 'feb';
+        dayName = 'Monday';
         break;
       case 2:
-        month = 'march';
+        dayName = 'Tuesday';
         break;
       case 3:
-        month = 'april';
+        dayName = 'Wednesday';
         break;
       case 4:
-        month = 'may';
+        dayName = 'Thursday';
         break;
       case 5:
-        month = 'june';
+        dayName = 'Friday';
         break;
       case 6:
-        month = 'july';
-        break;
-      case 7:
-        month = 'aug';
-        break;
-      case 8:
-        month = 'sept';
-        break;
-      case 9:
-        month = 'oct';
-        break;
-      case 10:
-        month = 'nov';
-        break;
-      case 11:
-        month = 'dec';
+        dayName = 'Sunday';
         break;
       default:
         break;
-    }
+    };
 
-    const dateToDisplay = `${month.toUpperCase()} ${day}`;
+    switch (month) {
+      case 0:
+        month = 'Jan';
+        break;
+      case 1:
+        month = 'Feb';
+        break;
+      case 2:
+        month = 'March';
+        break;
+      case 3:
+        month = 'April';
+        break;
+      case 4:
+        month = 'May';
+        break;
+      case 5:
+        month = 'June';
+        break;
+      case 6:
+        month = 'July';
+        break;
+      case 7:
+        month = 'Aug';
+        break;
+      case 8:
+        month = 'Sept';
+        break;
+      case 9:
+        month = 'Oct';
+        break;
+      case 10:
+        month = 'Nov';
+        break;
+      case 11:
+        month = 'Dec';
+        break;
+      default:
+        break;
+    };
+
+    const dateToDisplay = `${dayName}, ${month} ${day}`;
     return dateToDisplay;
   };
 
   return (
-    <div>{displayDate(todaysDate)}</div>
+    <h1 className='date-display'>
+      {displayDate(todaysDate)}
+    </h1>
   )
 }
 
