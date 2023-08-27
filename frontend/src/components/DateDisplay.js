@@ -3,12 +3,13 @@ const DateDisplay = () => {
   const todaysDate = new Date();
 
   const displayDate = (todaysDate) => {
-    let day = todaysDate.getDay();
+    let day = todaysDate.getDate();
+    let dayName = todaysDate.getDay();
     let month = todaysDate.getMonth();
 
-    let dayName;
+    // let dayName;
 
-    switch (day) {
+    switch (dayName) {
       case 0:
         dayName = 'Sunday';
         break;
@@ -28,7 +29,7 @@ const DateDisplay = () => {
         dayName = 'Friday';
         break;
       case 6:
-        dayName = 'Sunday';
+        dayName = 'Saturday';
         break;
       default:
         break;
