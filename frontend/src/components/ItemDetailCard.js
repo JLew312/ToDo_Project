@@ -1,19 +1,11 @@
-import { useEffect, useReducer } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 
-import { getItemDetails } from '../store/todoitem';
+import AddItemForm from "./AddItemForm";
 
 const ItemDetailCard = () => {
   const { itemId } = useParams();
-  const dispatch = useDispatch();
   const item = useSelector((state) => state.todoitem[itemId]);
-
-  console.log(item)
-
-  const handleClick = () => {
-    dispatch(getItemDetails(item))
-  }
 
   return (
     <>
@@ -51,6 +43,7 @@ const ItemDetailCard = () => {
           <p id="details-vals">{item.notes}</p>
         </div>
       </div>
+      <AddItemForm />
     </>
   )
 }
