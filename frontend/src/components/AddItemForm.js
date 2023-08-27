@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { addItem } from "../store/todoitem";
 
-const AddItemForm = () => {
+const AddItemForm = ({ setShowForm }) => {
   const dispatch = useDispatch();
   const items = useSelector(state => state.todoitem)
 
   const [title, setTitle] = useState('');
   const [startTime, setStartTime] = useState('');
-  const [endTime, setEnedTime] = useState('');
+  const [endTime, setEndTime] = useState('');
   const [where, setWhere] = useState('');
   const [reminder, setReminder] = useState('');
   const [repeat, setRepeat] = useState('');
@@ -18,7 +18,7 @@ const AddItemForm = () => {
 
   const updateTitle = e => setTitle(e.target.value);
   const updateStart = e => setStartTime(e.target.value);
-  const updateEnd = e => setEnedTime(e.target.value);
+  const updateEnd = e => setEndTime(e.target.value);
   const updateWhere = e => setWhere(e.target.value);
   const updateReminder = e => setReminder(e.target.value);
   const updateRepeat = e => setRepeat(e.target.value);
@@ -37,13 +37,13 @@ const AddItemForm = () => {
       notes
     };
 
-    try {
-      // haven't yet built action creator
-      dispatch(addItem(payload));
-      console.log('Nailed it!')
-    } catch {
-      console.log('Whoops!')
-    }
+    dispatch(addItem(payload));
+    setShowForm(false);
+  };
+
+  const handleCancel = (e) => {
+    e.preventDefault();
+    setShowForm(false);
   };
 
   return (
@@ -77,7 +77,7 @@ const AddItemForm = () => {
         <textarea name="notes" cols="30" rows="10" onChange={udpateNotes}></textarea>
       </div>
       <button type="submit">Submit</button>
-      <button>Cancel</button>
+      <button onClick={handleCancel}>Cancel</button>
     </form>
   )
 }

@@ -1,16 +1,20 @@
-import { useEffect } from 'react';
-import { useParams, Route, NavLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams, Route, Routes, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import sampleItems from './sampleItems';
 
 import DateDisplay from './DateDisplay';
 import ItemDetailCard from './ItemDetailCard';
+import AddItemForm from './AddItemForm';
 
 import { getItems, getItemDetails } from '../store/todoitem';
 
 const ItemBrowser = () => {
   const { itemId } = useParams();
   const dispatch = useDispatch();
+
+  const [showForm, setShowForm] = useState(false);
+
   const items = useSelector((state) => {
     return state.todoitem
   });
@@ -43,34 +47,26 @@ const ItemBrowser = () => {
     while(!sorted) {
       sorted = true;
 
-      for (let i = 0; i < items.length; i++) {
-        let itemA = items[i];
-        let itemB = items[i - 1];
-
-        if (itemA < itemB) {
-          let temp = itemA;
-          itemA = itemB;
-          itemB = temp;
-          sorted = false
+      for (let i = 0; i < items.length - 1; i++) {
+        if (new Date(items[i].startTime).valueOf() > new Date(items[i + 1].startTime).valueOf()) {
+          let temp = items[i];
+          items[i] = items[i + 1];
+          items[i + 1] = temp;
+          sorted = false;
         }
       }
     }
+    return items;
   };
-
-  console.log(`Before: ${completed}`)
-  console.log(`Before: ${incomplete}`)
 
   sortItemsByDate(completed);
   sortItemsByDate(incomplete);
-
-  console.log(`After: ${completed}`)
-  console.log(`After: ${incomplete}`)
 
   return (
     <>
       <div className='header'>
         <DateDisplay />
-        <h3 className='items-ratio'>{`${completed.length} completed / ${(Object.values(items)).length} total`}</h3>
+        <h3 className='items-ratio'>{`${completed.length} completed / ${(Object.values(items)).length - 1} total`}</h3>
       </div>
       <div>
         {incomplete.length === 0 ?
@@ -87,7 +83,16 @@ const ItemBrowser = () => {
             </NavLink>
         ))}
       </div>
-      <button className='add-btn'>+</button>
+      <button className='add-btn' onClick={() => setShowForm(true)}>+</button>
+        {showForm ? (
+          <div id='add-item-form'>
+            <AddItemForm setShowForm={setShowForm}/>
+          </div>
+        ) : (
+          <Routes>
+            <Route element={<ItemDetailCard />}/>
+          </Routes>
+        )}
       <div className='space'></div>
       <h3 className='completed-label'>Completed</h3>
       <div>
