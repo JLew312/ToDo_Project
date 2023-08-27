@@ -29,13 +29,42 @@ const ItemBrowser = () => {
 
   let completed = [];
   let incomplete = [];
-  const sortItems = (items) => {
+  const sortItemsByCompleteness = (items) => {
     (Object.values(items)).forEach(item => {
       item.completed === true ? completed.push(item) : incomplete.push(item);
     })
   };
 
-  sortItems(items);
+  sortItemsByCompleteness(items);
+
+  const sortItemsByDate = (items) => {
+    let sorted = false;
+
+    while(!sorted) {
+      sorted = true;
+
+      for (let i = 0; i < items.length; i++) {
+        let itemA = items[i];
+        let itemB = items[i - 1];
+
+        if (itemA < itemB) {
+          let temp = itemA;
+          itemA = itemB;
+          itemB = temp;
+          sorted = false
+        }
+      }
+    }
+  };
+
+  console.log(`Before: ${completed}`)
+  console.log(`Before: ${incomplete}`)
+
+  sortItemsByDate(completed);
+  sortItemsByDate(incomplete);
+
+  console.log(`After: ${completed}`)
+  console.log(`After: ${incomplete}`)
 
   return (
     <>
@@ -48,6 +77,7 @@ const ItemBrowser = () => {
           <h4 style={{margin: 10}}>What are you doing today?</h4>
           :
           incomplete.map(item => (
+            item.title &&
             <NavLink style={{textDecoration: 'none'}} key={item.id} to={`/${item.id}`} >
               <div className='item-box-closed'>
                 <input className='radio-btn' type="radio" />

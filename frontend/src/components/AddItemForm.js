@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 
+import { addItem } from "../store/todoitem";
+
 const AddItemForm = () => {
   const dispatch = useDispatch();
+  const items = useSelector(state => state.todoitem)
 
   const [title, setTitle] = useState('');
   const [startTime, setStartTime] = useState('');
@@ -34,41 +37,46 @@ const AddItemForm = () => {
       notes
     };
 
-    // haven't yet built action creator
-    dispatch()
+    try {
+      // haven't yet built action creator
+      dispatch(addItem(payload));
+      console.log('Nailed it!')
+    } catch {
+      console.log('Whoops!')
+    }
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div>
         <label>Title: </label>
-        <input type="text" placeholder="What are you doing?"/>
+        <input type="text" placeholder="What are you doing?" onChange={updateTitle}/>
       </div>
       <div>
         <label>Start Date: </label>
-        <input type="datetime-local" placeholder="Title"/>
+        <input type="datetime-local" placeholder="Title" onChange={updateStart}/>
       </div>
       <div>
         <label>End Date: </label>
-        <input type="datetime-local" placeholder="Title"/>
+        <input type="datetime-local" placeholder="Title" onChange={updateEnd}/>
       </div>
       <div>
         <label>Where: </label>
-        <input type="text" placeholder="Your items location"/>
+        <input type="text" placeholder="Your items location" onChange={updateWhere}/>
       </div>
       <div>
         <label>Reminder: </label>
-        <input type="number" placeholder="Reminder in seconds"/>
+        <input type="number" placeholder="Reminder in seconds" onChange={updateReminder}/>
       </div>
       <div>
         <label>Repeat: </label>
-        <input type="number" placeholder="Repeat duration in seconds"/>
+        <input type="number" placeholder="Repeat duration in seconds" onChange={updateRepeat}/>
       </div>
       <div>
         <label>Notes: </label>
-        <textarea name="notes" cols="30" rows="10"></textarea>
+        <textarea name="notes" cols="30" rows="10" onChange={udpateNotes}></textarea>
       </div>
-      <button>Submit</button>
+      <button type="submit">Submit</button>
       <button>Cancel</button>
     </form>
   )

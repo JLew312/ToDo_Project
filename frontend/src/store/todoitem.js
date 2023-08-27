@@ -11,6 +11,21 @@ const addSingleItem = item => ({
   item
 });
 
+export const addItem = item => async dispatch => {
+  const res = await fetch('/api/todo-items', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(item)
+  });
+
+  console.log(item)
+
+  if (res.ok) {
+    const item = await res.json();
+    dispatch(addSingleItem(item));
+  }
+};
+
 export const getItemDetails = item => async dispatch => {
   const res = await fetch(`/api/todo-items/${item.id}`);
 
@@ -40,6 +55,7 @@ const itemReducer = (state = initialState, action) => {
       action.list.Items.forEach(item => {
         allItems[item.id] = item;
       });
+
       return {
         ...allItems,
         ...state,
