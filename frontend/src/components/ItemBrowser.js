@@ -71,7 +71,6 @@ const ItemBrowser = () => {
           </NavLink>
         ))}
       </div>
-      <ItemDetailCard />
     </>
   );
 }

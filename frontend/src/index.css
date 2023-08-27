@@ -113,3 +113,26 @@ body {
   margin: 10px;
   color: grey;
 }
+
+#details-keys {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+
+  #details-vals {
+    margin-left: 10px;
+  }
+}
+
+#details-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  #comp-tag {
+    position: fixed;
+    margin-left: 437px;
+    font-style: italic;
+  }
+}
