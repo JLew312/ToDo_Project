@@ -1,11 +1,15 @@
-import { useSelector } from "react-redux";
-import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux";
+import { useParams, useNavigate } from 'react-router-dom';
 
-import AddItemForm from "./AddItemForm";
+import { deleteItem } from '../store/todoitem';
 
 const ItemDetailCard = () => {
   const { itemId } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const item = useSelector((state) => state.todoitem[itemId]);
+
+  console.log(item)
 
   return (
     <>
@@ -13,7 +17,7 @@ const ItemDetailCard = () => {
         <div id="details-header">
           <h3 style={{margin: 10}}>{item.title}</h3>
           {item.completed === true ?
-            <h4 id="comp-tag"  style={{color: "blue"}}>Completed</h4>
+            <h4 id="comp-tag" style={{color: "blue"}}>Completed</h4>
             :
             <h4 id="comp-tag" style={{color: "red"}}>Incomplete</h4>
           }
@@ -43,7 +47,8 @@ const ItemDetailCard = () => {
           <p id="details-vals">{item.notes}</p>
         </div>
       </div>
-      <AddItemForm />
+      <button onClick={() => dispatch(deleteItem(item))}>Delete Item</button>
+      <button onClick={() => navigate('/')}>Home</button>
     </>
   )
 }

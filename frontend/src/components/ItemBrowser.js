@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Route, Routes, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-// import sampleItems from './sampleItems';
 
 import DateDisplay from './DateDisplay';
 import ItemDetailCard from './ItemDetailCard';
@@ -13,6 +12,7 @@ const ItemBrowser = () => {
   const { itemId } = useParams();
   const dispatch = useDispatch();
 
+  const [showDetail, setShowDetail] = useState(false);
   const [showForm, setShowForm] = useState(false);
 
   const items = useSelector((state) => {
@@ -65,7 +65,7 @@ const ItemBrowser = () => {
   return (
     <>
       <div className='header'>
-        <DateDisplay />
+        <DateDisplay/>
         <h3 className='items-ratio'>{`${completed.length} completed / ${(Object.values(items)).length - 1} total`}</h3>
       </div>
       <div>
@@ -74,13 +74,24 @@ const ItemBrowser = () => {
           :
           incomplete.map(item => (
             item.title &&
-            <NavLink style={{textDecoration: 'none'}} key={item.id} to={`/${item.id}`} >
-              <div className='item-box-closed'>
-                <input className='radio-btn' type="radio" />
-                <h3 key={item.title}>{item.title}</h3>
-                <h4>{new Date(item.startTime).toDateString()}</h4>
-              </div>
-            </NavLink>
+            <div>
+              {showDetail ? (
+                <ItemDetailCard />
+              ) : (
+                <div>
+                  <input className='radio-btn' type="radio"/>
+                  <NavLink style={{textDecoration: 'none'}} key={item.id} to={`/${item.id}`} onClick={() => setShowDetail(true)}>
+                    <div className='item-box-closed'>
+                      {/* THIS DIV HOLDS PLACE FOR RADIO BUTTON
+                          THAT EXISTS OUTSIDE THIS DIV */}
+                      <div></div>
+                      <h3 key={item.title}>{item.title}</h3>
+                      <h4>{new Date(item.startTime).toDateString()}</h4>
+                    </div>
+                  </NavLink>
+                </div>
+              )}
+            </div>
         ))}
       </div>
       <button className='add-btn' onClick={() => setShowForm(true)}>+</button>
@@ -89,6 +100,7 @@ const ItemBrowser = () => {
             <AddItemForm setShowForm={setShowForm}/>
           </div>
         ) : (
+          // is this part necessary?
           <Routes>
             <Route element={<ItemDetailCard />}/>
           </Routes>

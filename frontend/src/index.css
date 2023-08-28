@@ -9,28 +9,35 @@ body {
 }
 
 .header {
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
 }
 
 .date-display {
   font-size: 25px;
   color: darkmagenta;
-  margin: 10px;
-  margin-left: 20px;
+  position: absolute;
+  left: 20px;
   text-shadow: rgb(122, 122, 122) 4px 3px 7px;
+  width: 100%;
 }
 
 .items-ratio {
-  position: fixed;
-  margin-left: 437px;
+  position: absolute;
+  left: 425px;
+  /* top: 19px; */
+  /* right: 20px; */
+  width: 100%;
 }
 
 .item-box-closed {
   color: black;
   border: 2px solid black;
   margin: 10px;
+  margin-top: -10px;
   padding: 5px;
   height: 35px;
   width: 600px;
@@ -58,6 +65,12 @@ body {
   justify-content: space-between;
   border-radius: .2cm;
   cursor: pointer;
+}
+
+.radio-btn {
+  position: relative;
+  top: 25px;
+  left: 25px;
 }
 
 .item-box-closed-completed:hover {
