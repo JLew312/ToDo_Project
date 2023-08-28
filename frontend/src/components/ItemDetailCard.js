@@ -9,8 +9,6 @@ const ItemDetailCard = () => {
   const navigate = useNavigate();
   const item = useSelector((state) => state.todoitem[itemId]);
 
-  console.log(item)
-
   return (
     <>
       <div>
@@ -47,7 +45,11 @@ const ItemDetailCard = () => {
           <p id="details-vals">{item.notes}</p>
         </div>
       </div>
-      <button onClick={() => dispatch(deleteItem(item))}>Delete Item</button>
+      <button onClick={() => (
+        dispatch(deleteItem(item),
+        navigate('/'),
+        navigate(0)
+        ))}>Delete Item</button>
       <button onClick={() => navigate('/')}>Home</button>
     </>
   )

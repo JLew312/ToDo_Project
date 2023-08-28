@@ -6,7 +6,7 @@ import DateDisplay from './DateDisplay';
 import ItemDetailCard from './ItemDetailCard';
 import AddItemForm from './AddItemForm';
 
-import { getItems, getItemDetails } from '../store/todoitem';
+import { getItems } from '../store/todoitem';
 
 const ItemBrowser = () => {
   const { itemId } = useParams();
@@ -18,18 +18,18 @@ const ItemBrowser = () => {
   const items = useSelector((state) => {
     return state.todoitem
   });
-  const item = useSelector((state) => state.todoitem[itemId]);
+  // const item = useSelector((state) => state.todoitem[itemId]);
 
   useEffect(() => {
     dispatch(getItems());
   }, [dispatch]);
 
-  const handleClick = async (e) => {
-    // e.preventDefault();
+  // const handleClick = async (e) => {
+  //   // e.preventDefault();
 
-    dispatch(getItemDetails(item));
-    console.log(item)
-  };
+  //   dispatch(getItemDetails(item));
+  //   console.log(item)
+  // };
 
   let completed = [];
   let incomplete = [];

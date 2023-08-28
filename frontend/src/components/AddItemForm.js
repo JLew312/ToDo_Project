@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 
@@ -6,7 +6,7 @@ import { addItem } from "../store/todoitem";
 
 const AddItemForm = ({ setShowForm }) => {
   const dispatch = useDispatch();
-  const items = useSelector(state => state.todoitem)
+  // const items = useSelector(state => state.todoitem)
 
   const [title, setTitle] = useState('');
   const [startTime, setStartTime] = useState('');
@@ -26,6 +26,18 @@ const AddItemForm = ({ setShowForm }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!title) {
+      return alert('Please add title')
+    }
+
+    if (!startTime) {
+      return alert('Please add Start Time and Day')
+    }
+
+    if (!endTime) {
+      return alert('Please add End Time and Day')
+    }
 
     const payload = {
       title,
