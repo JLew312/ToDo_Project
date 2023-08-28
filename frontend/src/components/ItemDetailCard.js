@@ -14,11 +14,12 @@ const ItemDetailCard = () => {
       <div>
         <div id="details-header">
           <h3 style={{margin: 10}}>{item.title}</h3>
-          {item.completed === true ?
+          {/* {item.completed === true ?
             <h4 id="comp-tag" style={{color: "blue"}}>Completed</h4>
             :
             <h4 id="comp-tag" style={{color: "red"}}>Incomplete</h4>
-          }
+          } */}
+          <button>Edit</button>
         </div>
         <div id="details-keys">
           <h4>Start: </h4>
@@ -49,7 +50,7 @@ const ItemDetailCard = () => {
         dispatch(deleteItem(item),
         navigate('/'),
         navigate(0)
-        ))}>Delete Item</button>
+        ))}>Delete</button>
       <button onClick={() => navigate('/')}>Home</button>
     </>
   )

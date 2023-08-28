@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from "react-redux";
 
 import { addItem } from "../store/todoitem";
 
 const AddItemForm = ({ setShowForm }) => {
   const dispatch = useDispatch();
-  // const items = useSelector(state => state.todoitem)
 
   const [title, setTitle] = useState('');
   const [startTime, setStartTime] = useState('');
