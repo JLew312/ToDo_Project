@@ -7,7 +7,7 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path='/' exact element={<ItemBrowser />} />
+        <Route path='*' exact element={<ItemBrowser />} />
         <Route path='/:itemId' exact element={<ItemDetailCard />} />
       </Routes>
     </>

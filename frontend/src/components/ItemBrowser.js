@@ -75,7 +75,7 @@ const ItemBrowser = () => {
           :
           incomplete.map(item => (
             item.title &&
-            <div>
+            <div key={item.id}>
               {showDetail ? (
                 <ItemDetailCard />
               ) : (

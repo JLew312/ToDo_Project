@@ -14,10 +14,10 @@ export const EditItem = ({ item, setShowEditForm }) => {
   const [repeat, setRepeat] = useState(item.repeat);
   const [notes, setNotes] = useState(item.notes);
 
-  const [allDay, setAllDay] = useState(endTime ? true : false);
+  // const [allDay, setAllDay] = useState(endTime ? true : false);
 
   const updateTitle = e => setTitle(e.target.value);
-  const updateAllDay = e => setAllDay(e.target.checked);
+  // const updateAllDay = e => setAllDay(e.target.checked);
   const updateStart = e => setStartTime(e.target.value);
   const updateEnd = e => setEndTime(e.target.value);
   const updateWhere = e => setWhere(e.target.value);
@@ -66,7 +66,7 @@ export const EditItem = ({ item, setShowEditForm }) => {
         <label>Title: </label>
         <input type="text" placeholder={!item.title ? "Element not added" : item.title} onChange={updateTitle}/>
       </div>
-      <div>
+      {/* <div>
         <label>All Day?</label>
         {!endTime ?
           (
@@ -77,12 +77,12 @@ export const EditItem = ({ item, setShowEditForm }) => {
             <input type="checkbox" onChange={updateAllDay} defaultChecked />
           )
         }
-      </div>
+      </div> */}
       <div>
         <label>Start Date: </label>
         <input type="datetime-local" placeholder="Start" onChange={updateStart}/>
       </div>
-      {allDay &&
+      {endTime &&
           <div>
             <label>End Date: </label>
             <input type="datetime-local" placeholder="End" onChange={updateEnd}/>
