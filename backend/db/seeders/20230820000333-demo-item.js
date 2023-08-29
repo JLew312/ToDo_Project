@@ -62,7 +62,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     await queryInterface.bulkDelete(options, {
-      id: [28, 29, 30]
+      id: [1,2,3]
     })
   }
 };
