@@ -14,9 +14,10 @@ export const EditItem = ({ item, setShowEditForm }) => {
   const [repeat, setRepeat] = useState(item.repeat);
   const [notes, setNotes] = useState(item.notes);
 
-  const [addDay, setAllDay] = useState(false);
+  const [allDay, setAllDay] = useState(endTime ? true : false);
 
   const updateTitle = e => setTitle(e.target.value);
+  const updateAllDay = e => setAllDay(e.target.checked);
   const updateStart = e => setStartTime(e.target.value);
   const updateEnd = e => setEndTime(e.target.value);
   const updateWhere = e => setWhere(e.target.value);
@@ -66,13 +67,27 @@ export const EditItem = ({ item, setShowEditForm }) => {
         <input type="text" placeholder={!item.title ? "Element not added" : item.title} onChange={updateTitle}/>
       </div>
       <div>
-        <label>Start Date: </label>
-        <input type="datetime-local" defaultValue={item.startTime.slice(0, item.startTime.length - 1)} onChange={updateStart}/>
+        <label>All Day?</label>
+        {!endTime ?
+          (
+          <input type="checkbox" onChange={updateAllDay} />
+          )
+          :
+          (
+            <input type="checkbox" onChange={updateAllDay} defaultChecked />
+          )
+        }
       </div>
       <div>
-        <label>End Date: </label>
-        <input type="datetime-local" defaultValue={item.endTime.slice(0, item.startTime.length - 1)} onChange={updateEnd}/>
+        <label>Start Date: </label>
+        <input type="datetime-local" placeholder="Start" onChange={updateStart}/>
       </div>
+      {allDay &&
+          <div>
+            <label>End Date: </label>
+            <input type="datetime-local" placeholder="End" onChange={updateEnd}/>
+          </div>
+      }
       <div>
         <label>Where: </label>
         <input type="text" placeholder={!item.where ? "Element not added" : item.where} onChange={updateWhere}/>

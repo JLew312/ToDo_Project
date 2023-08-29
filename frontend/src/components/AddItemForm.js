@@ -7,6 +7,7 @@ const AddItemForm = ({ setShowForm }) => {
   const dispatch = useDispatch();
 
   const [title, setTitle] = useState('');
+  const [allDay, setAllDay] = useState(false);
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [where, setWhere] = useState('');
@@ -14,7 +15,9 @@ const AddItemForm = ({ setShowForm }) => {
   const [repeat, setRepeat] = useState('');
   const [notes, setNotes] = useState('');
 
+
   const updateTitle = e => setTitle(e.target.value);
+  const updateAllDay = e => setAllDay(e.target.checked)
   const updateStart = e => setStartTime(e.target.value);
   const updateEnd = e => setEndTime(e.target.value);
   const updateWhere = e => setWhere(e.target.value);
@@ -31,10 +34,6 @@ const AddItemForm = ({ setShowForm }) => {
 
     if (!startTime) {
       return alert('Please add Start Time and Day')
-    }
-
-    if (!endTime) {
-      return alert('Please add End Time and Day')
     }
 
     const payload = {
@@ -63,13 +62,19 @@ const AddItemForm = ({ setShowForm }) => {
         <input type="text" placeholder="What are you doing?" onChange={updateTitle}/>
       </div>
       <div>
+        <label>All Day?</label>
+        <input type="checkbox" onChange={updateAllDay}/>
+      </div>
+      <div>
         <label>Start Date: </label>
         <input type="datetime-local" placeholder="Start" onChange={updateStart}/>
       </div>
-      <div>
-        <label>End Date: </label>
-        <input type="datetime-local" placeholder="End" onChange={updateEnd}/>
-      </div>
+      {allDay &&
+          <div>
+            <label>End Date: </label>
+            <input type="datetime-local" placeholder="End" onChange={updateEnd}/>
+          </div>
+      }
       <div>
         <label>Where: </label>
         <input type="text" placeholder="Your items location" onChange={updateWhere}/>
