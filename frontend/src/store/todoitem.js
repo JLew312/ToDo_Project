@@ -17,6 +17,19 @@ const deleteSingleItem = (item) => ({
   item
 });
 
+export const editSingleItem = (item) => async dispatch => {
+  const res = await fetch(`/api/todo-items/${item.id}`, {
+    method: 'PUT',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(item)
+  })
+
+  if (res.ok) {
+    const item = await res.json();
+    dispatch(addSingleItem(item));
+  }
+};
+
 export const deleteItem = (item) => async dispatch => {
   const res = await fetch(`/api/todo-items/${item.id}`, {
     method: 'DELETE'

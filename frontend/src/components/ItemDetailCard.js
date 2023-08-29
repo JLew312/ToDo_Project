@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { deleteItem } from '../store/todoitem';
+import { EditItem } from './editItem';
+
 
 const ItemDetailCard = () => {
   const { itemId } = useParams();
@@ -9,8 +12,16 @@ const ItemDetailCard = () => {
   const navigate = useNavigate();
   const item = useSelector((state) => state.todoitem[itemId]);
 
-  return (
-    <>
+  const [showEditForm, setShowEditForm] = useState(false);
+
+  let content;
+
+  if (showEditForm) {
+    content = (
+      <EditItem item={item} setShowEditForm={setShowEditForm}/>
+    );
+  } else {
+    content = (
       <div>
         <div id="details-header">
           <h3 style={{margin: 10}}>{item.title}</h3>
@@ -19,7 +30,7 @@ const ItemDetailCard = () => {
             :
             <h4 id="comp-tag" style={{color: "red"}}>Incomplete</h4>
           } */}
-          <button>Edit</button>
+          <button onClick={() => setShowEditForm(true)}>Edit</button>
         </div>
         <div id="details-keys">
           <h4>Start: </h4>
@@ -45,13 +56,19 @@ const ItemDetailCard = () => {
           <h4>Notes: </h4>
           <p id="details-vals">{item.notes}</p>
         </div>
+        <button onClick={() => (
+          dispatch(deleteItem(item),
+          navigate('/'),
+          navigate(0)
+          ))}>Delete</button>
+        <button onClick={() => navigate('/')}>Home</button>
       </div>
-      <button onClick={() => (
-        dispatch(deleteItem(item),
-        navigate('/'),
-        navigate(0)
-        ))}>Delete</button>
-      <button onClick={() => navigate('/')}>Home</button>
+    );
+  }
+
+  return (
+    <>
+      {content}
     </>
   )
 }

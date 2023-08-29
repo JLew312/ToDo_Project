@@ -6,7 +6,7 @@ import DateDisplay from './DateDisplay';
 import ItemDetailCard from './ItemDetailCard';
 import AddItemForm from './AddItemForm';
 
-import { getItems } from '../store/todoitem';
+import { getItems, editSingleItem } from '../store/todoitem';
 
 const ItemBrowser = () => {
   const { itemId } = useParams();
@@ -14,6 +14,7 @@ const ItemBrowser = () => {
 
   const [showDetail, setShowDetail] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [checked, setChecked] = useState();
 
   const items = useSelector((state) => {
     return state.todoitem
@@ -79,7 +80,11 @@ const ItemBrowser = () => {
                 <ItemDetailCard />
               ) : (
                 <div>
-                  <input className='radio-btn' type="radio"/>
+                  <input className='radio-btn' type="radio" onChange={(e) => (
+                    setChecked(e.target.checked),
+                    item.completed = true,
+                    dispatch(editSingleItem(item))
+                  )}/>
                   <NavLink style={{textDecoration: 'none'}} key={item.id} to={`/${item.id}`} onClick={() => setShowDetail(true)}>
                     <div className='item-box-closed'>
                       {/* THIS DIV HOLDS PLACE FOR RADIO BUTTON

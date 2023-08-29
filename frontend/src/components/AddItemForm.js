@@ -64,11 +64,11 @@ const AddItemForm = ({ setShowForm }) => {
       </div>
       <div>
         <label>Start Date: </label>
-        <input type="datetime-local" placeholder="Title" onChange={updateStart}/>
+        <input type="datetime-local" placeholder="Start" onChange={updateStart}/>
       </div>
       <div>
         <label>End Date: </label>
-        <input type="datetime-local" placeholder="Title" onChange={updateEnd}/>
+        <input type="datetime-local" placeholder="End" onChange={updateEnd}/>
       </div>
       <div>
         <label>Where: </label>
@@ -84,7 +84,7 @@ const AddItemForm = ({ setShowForm }) => {
       </div>
       <div>
         <label>Notes: </label>
-        <textarea name="notes" cols="30" rows="10" onChange={udpateNotes}></textarea>
+        <textarea name="notes" cols="30" rows="10" onChange={udpateNotes} placeholder="Add notes..."></textarea>
       </div>
       <button type="submit">Submit</button>
       <button onClick={handleCancel}>Cancel</button>
